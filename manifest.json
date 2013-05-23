@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+
+  "name": "BeerCoder",
+  "description": "Beer recipe formulation and brewing software.",
+  "version": "0.1",
+
+  "permissions": [
+    "experimental",
+    "syncFileSystem",
+    "identity"
+  ],
+  
+  "icons": {
+    "128": "img/icon-128.png"
+  },
+
+  "app": {
+    "background": {
+      "scripts": ["js/background.js"]
+    }
+  },
+
+  "oauth2": {
+    "client_id": "808106968163.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/userinfo.profile"]
+  }
+
+}
