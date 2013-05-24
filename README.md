@@ -12,11 +12,6 @@ at its core.
 
 
 
-Enable the experimental API in your browser:
-
-Go to chrome://flags, find "Experimental Extension APIs", click its "Enable" link, and restart Chrome.
-
-
 LICENSE:
 --------
 
