@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <head>
-  <title>BeerCoder (BML Editor / Brew Assistant)</title>
-  <link rel="stylesheet" href="third_party/jqueryui/jquery-ui.css" type="text/css" />
+	<title>BeerCoder (BML Editor / Brew Assistant)</title>
+	<link rel="stylesheet" href="third_party/jqueryui/jquery-ui.css" type="text/css" />
+
+
+	<link rel="stylesheet" href="third_party/codemirror/lib/codemirror.css" type="text/css" />
+	<link rel="stylesheet" href="css/bml.css" type="text/css" />
+	<link rel="stylesheet" href="css/main.css" type="text/css" />
+
 </head>
 <body>
-  <div id="fs-selector">
-    <h1>running</h1>
+	
+	<div id="brewcoder"></div>
 
-     <div id="user_info"></div>
-    <button id="signin" style="display:none">Sign in</button>
-  </div>
-  <script src="third_party/jquery/jquery-2.0.0.js"></script>
-  <script src="third_party/jqueryui/jquery-ui.js"></script>
-  <script src="js/main.js"></script>
+
+	<div id="templates" style="display:none;">
+
+		<div id="tmplRecipeCard" class="brewCard recipeBrewCard">
+			<div class="editorSection">
+				<textarea></textarea>
+			</div>
+			<div class="specsSection">
+
+				<div class="specsSection primaryBeerSpecs">
+					
+				</div>
+
+				<div class="specsSection recipeSpecs">
+					
+				</div>
+
+				<div class="specsSection styleNotes">
+					
+				</div>
+
+				<div class="specsSection waterSpecs">
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<script src="third_party/jquery/jquery-2.0.0.js"></script>
+	<script src="third_party/jqueryui/jquery-ui.js"></script>
+
+	<script src="third_party/codemirror/lib/codemirror.js"></script>
+	<script src="third_party/codemirror/lib/util/simple-hint.js"></script>
+
+	
+	<script src="js/brewcalc/tables.js"></script>
+	<script src="js/brewcalc/bml.js"></script>
+	<script src="js/brewcalc/brewcalc.js"></script>
+	<script src="js/brewcalc/brewcalc-gravity.js"></script>
+	<script src="js/brewcalc/brewcalc-units.js"></script>
+	<script src="js/brewcalc/brewsys.js"></script>
+	
+	<script src="js/main.js"></script>
 </body>

@@ -1,0 +1,158 @@
+
+
+.CodeMirror {
+   /* border-top: 1px solid black; border-bottom: 1px solid black; */
+   font-size:15px;
+   line-height: 16px;
+}
+
+.CodeMirror-scroll {
+    height: auto; 
+    overflow: visible;
+}
+
+
+
+.CodeMirror-completions select {
+	width: auto;
+	border: 1px solid #555;
+	border-top: 0;
+	background: white;
+	padding: 0 1em 1em;
+}
+
+.CodeMirror-lines {
+	
+	
+	
+	padding-left: 7em;
+}
+
+.CodeMirror-lines > div {
+	background:#fff;
+	
+}
+
+
+.CodeMirror .gutter-info {
+	color:#5c5;
+	left: -68px;
+	position: absolute;
+}
+
+
+.CodeMirror span.cm-attribute {
+	color:#999;
+}
+
+/*
+.CodeMirror pre .cm-header {
+	font-family: monospace;
+}
+
+.CodeMirror pre {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+ */
+
+.recipe-editor .section {
+	/*
+	border: 1px solid #DDD;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	 */
+
+	/*
+	padding:1em;
+	background-color: white;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+
+	background: #F7F7F9;
+	 */
+}
+
+
+
+
+.results-wrapper .guide {
+	font-size:0.8em;
+	line-height: 1em;
+	color:#777;
+}
+
+.results-wrapper .guide-block {
+	display:inline-block;
+
+}
+
+.results-wrapper .glass .glass-overlay {
+	width:60px;
+	height:85px;
+	background: transparent url('../img/pintglass.png') no-repeat -13px -10px;
+}
+
+.results-wrapper .glass {
+	width:60px;
+	height:85px;
+	display:inline-block;
+	vertical-align: top;
+}
+
+.results-wrapper .summary .totals {
+	display:inline-block;
+}
+
+
+.results-wrapper .summary {
+	margin-bottom:1em;
+}
+
+.results-wrapper .param {
+	margin:0.5em 0;
+}
+
+.results-wrapper .est {
+	font-size:1.7em;
+	color:#232;
+}
+
+.results-wrapper .conversion {
+	color:#444;
+	margin-left: 1em;
+	display:none;
+}
+
+
+.results-wrapper .warn .est {
+	color:#f43;
+}
+
+.results-wrapper .label {
+	width:40px;
+	display:inline-block;
+	text-align:right;
+	margin-right:0.5em;
+}
+/*
+.results-wrapper .value {
+	width:120px;
+	display:inline-block;
+	text-align:center;
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,7 @@
-(function() {
+/* globals BREWCALC, CodeMirror, BML */
 
+(function() {
+	'use strict';
 	var display = $('.beer-results .content');
 	
 
@@ -89,7 +91,7 @@
 		// fields.xxx.text(d.xxx);
 		// fields.xxx.text(d.xxx);
 	}
-	/*
+		/*
 			$('#bml').bmlParser({
 				update: function (ev, recipe) {
 					var stats = BREWCALC.compute(recipe);
@@ -109,11 +111,7 @@
 	};
 
 
-	var autoPatterns = {
-		'grain': /^[^\[]+$/,
-		'hops': /^[^\[]+$/,
-		'info': /./
-	};
+	
 
 
 	function read(namespace, path) {
@@ -134,7 +132,7 @@
 				return namespace;
 			}
 		}
-	};
+	}
 
 	function formatSG(f) {
 		if(!f) {
@@ -212,7 +210,7 @@
 		display.html($.tmpl('results', {
 			disp: d
 		}));
-*/
+		*/
 
 		render(d);
 
@@ -241,7 +239,7 @@
 				info.html(percent + '%');
 
 				info.css({
-					top: offset.top,
+					top: offset.top
 				});
 
 				grainLine.parents('div').first().after(info);
@@ -269,7 +267,7 @@
 				info.html(percent + '%');
 
 				info.css({
-					top: offset.top,
+					top: offset.top
 				});
 
 				line.parents('div').first().after(info);
@@ -282,15 +280,57 @@
 
 	}
 
-	editor = CodeMirror.fromTextArea($('.recipe-editor textarea')[0], {
-		mode: 'bml',
-		lineNumbers: false,
-		matchBrackets: true,
-		theme: "default",
-		onChange: function(cm, d) { /* d  {from, to, text, next} */
-			var cursor = cm.getCursor()
-			var section = cm.getStateAfter(cursor.line).section;
-			var line = cm.getLine(cursor.line);
+
+	function loadEditor(el){
+		
+		
+		parse();
+	}
+
+	
+
+	$.widget("beerCoder.recipeCard", {
+
+		_create: function(){
+			var self = this,
+				e = self.element,
+				o = self.options;
+
+			$('#tmplRecipeCard').clone().attr('id', false).appendTo(e);
+			self._buildEditor();
+			self.set(o.bml);
+		},
+
+		_buildEditor: function () {
+			var self = this,
+				editorContainer = self.element.find('textarea');
+
+			self.editor = CodeMirror.fromTextArea(editorContainer[0], {
+				mode: 'bml',
+				lineNumbers: false,
+				matchBrackets: true,
+				theme: "default",
+				onChange: function() {
+					self.update();
+				},
+				extraKeys: {
+					"Ctrl-Space": "autocomplete"
+				}
+			});
+		},
+
+		update: function () {
+			var self = this,
+				cm = self.editor,
+				cursor = cm.getCursor(),
+				section = cm.getStateAfter(cursor.line).section,
+				line = cm.getLine(cursor.line);
+
+			var autoPatterns = {
+				'grain': /^[^\[]+$/,
+				'hops': /^[^\[]+$/,
+				'info': /./
+			};
 
 			/*
 			 * determine wether to auto fire or not
@@ -301,14 +341,47 @@
 				}
 			}
 
-
-			parse();
+			self._parse(cm.getValue());
 		},
 
-		extraKeys: {
-			"Ctrl-Space": "autocomplete"
+		_parse: function (bml) {
+			var self = this,
+				stats, recipe;
+
+			if(!bml){
+				return;
+			}
+
+			console.log('BML', bml);
+
+			recipe = BML.parse(bml);
+			console.log('Recipe', recipe);
+
+			try{
+				stats = BREWCALC.compute(recipe);
+			}catch(err){
+				console.log('compute error: ', err);
+			}
+
+			console.log('Stats', stats);
+
+		},
+
+		clear: function () {
+			this.set();
+		},
+
+		set: function (bml) {
+			var self = this;
+
+
+			if(!bml){
+				return;
+			}
+
+			self.editor.setValue(bml);
+
 		}
 	});
-	parse();
 
 }());
