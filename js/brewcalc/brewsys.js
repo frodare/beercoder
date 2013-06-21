@@ -401,19 +401,25 @@
 				e = self.element,
 				specs = e.find('.primaryBeerSpecs'),
 				paramVals = {
-					og: specs.find('.spec-og').recipeParameter(),
-					fg: specs.find('.spec-fg').recipeParameter(),
-					ibu: specs.find('.spec-ibu').recipeParameter(),
-					srm: specs.find('.spec-srm').recipeParameter(),
-					bugu: specs.find('.spec-bugu').recipeParameter()
+					og: e.find('.spec-og').recipeParameter(),
+					fg: e.find('.spec-fg').recipeParameter(),
+					ibu: e.find('.spec-ibu').recipeParameter(),
+					srm: e.find('.spec-srm').recipeParameter(),
+					bugu: e.find('.spec-bugu').recipeParameter(),
+					abv: e.find('.spec-abv'),
+					abw: e.find('.spec-abw'),
+					cal12oz: e.find('.spec-cal12oz'),
+					glbs: e.find('.spec-glbs'),
+					hoz: e.find('.spec-hoz')
 				};
+
 
 			e.on('recipecardchange', null, function () {
 				var recipe = self.recipe,
 					stats = self.stats,
 					style = recipe.info.style;
 
-				console.log('recipe', recipe);
+				console.log('recipe', recipe, 'stats', stats);
 
 
 				var codes = ['og', 'fg', 'ibu', 'srm'];
@@ -441,6 +447,12 @@
 				paramVal.est = stats[paramCode];
 				paramVal.label = paramCode;
 				paramVals[paramCode].recipeParameter('set', paramVal);
+
+				codes = ['abv', 'abw', 'cal12oz', 'glbs', 'hoz'];
+
+				$.each(codes, function (i, code) {
+					paramVals[code].html(stats[code]);
+				});
 
 			});
 		},
