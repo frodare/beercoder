@@ -127,7 +127,7 @@ var BREWCALC = {
 		//TODO: use an average of og and og pre-boil
 
 
-		var buog =  ibu / gut;
+		var bugu =  ibu / gut;
 
 		var abv = ((1.05*(og-fg))/fg)/0.79*100;
 		var abw = (0.79 * abv) / fg;
@@ -153,7 +153,7 @@ var BREWCALC = {
 			abv: abv.toFixed(1),
 			abw: abw.toFixed(1),
 			srm: Math.round(srm),
-			buog: buog.toFixed(2),
+			bugu: bugu.toFixed(2),
 			cal12oz: Math.round(cal12oz)
 		};
 

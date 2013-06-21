@@ -287,6 +287,82 @@
 		parse();
 	}
 
+	function tmpl(id) {
+		return $('#' + id).clone().removeAttr('id');
+	}
+
+	$.widget("beerCoder.recipeParameter", {
+		
+		_create: function(){
+			var self = this,
+				e = self.element,
+				o = self.options;
+
+			tmpl('tmplRecipeParameter').appendTo(e);
+			self.label = e.find('.label');
+			self.estimateDisp = e.find('.est');
+			self.minDisp = e.find('.guide-min');
+			self.maxDisp = e.find('.guide-max');
+			self.avgDisp = e.find('.guide-avg');
+		},
+
+		clear: function () {
+			this.set();
+		},
+
+		set: function (paramVal) {
+			var self = this;
+			
+			self.estimate = paramVal.est;
+			self.min = paramVal.min;
+			self.max = paramVal.max;
+
+			self.minDisp.hide();
+			self.maxDisp.hide();
+			self.avgDisp.hide();
+
+			if(paramVal.min && paramVal.max){
+				self.minDisp.show().text(paramVal.min);
+				self.maxDisp.show().text(paramVal.max);
+			}else if(paramVal.avg){
+				self.avgDisp.show().text(paramVal.avg);
+			}
+
+			
+
+
+			self.estimateDisp.text(paramVal.est || '');
+			self.label.text(paramVal.label);
+
+			self.update();
+		},
+
+		update: function () {
+			var self = this,
+				e = self.element;
+
+			if(!self.estimate && self.estimate !== 0){
+				e.removeClass('warning').removeClass('over').removeClass('under');
+				return;
+			}
+
+			if(self.estimate < self.min){
+				e.addClass('warning').addClass('under');
+			}else if(self.estimate > self.max){
+				e.addClass('warning').addClass('over');
+			}else{
+				e.removeClass('warning').removeClass('over').removeClass('under');
+			}
+		},
+
+		setBounds: function(min, max) {
+			var self = this;
+
+			
+		}
+
+	});
+
 	
 
 	$.widget("beerCoder.recipeCard", {
@@ -296,8 +372,9 @@
 				e = self.element,
 				o = self.options;
 
-			$('#tmplRecipeCard').clone().attr('id', false).appendTo(e);
+			tmpl('tmplRecipeCard').appendTo(e);
 			self._buildEditor();
+			self._buildParameters();
 			self.set(o.bml);
 		},
 
@@ -316,6 +393,55 @@
 				extraKeys: {
 					"Ctrl-Space": "autocomplete"
 				}
+			});
+		},
+
+		_buildParameters: function () {
+			var self = this,
+				e = self.element,
+				specs = e.find('.primaryBeerSpecs'),
+				paramVals = {
+					og: specs.find('.spec-og').recipeParameter(),
+					fg: specs.find('.spec-fg').recipeParameter(),
+					ibu: specs.find('.spec-ibu').recipeParameter(),
+					srm: specs.find('.spec-srm').recipeParameter(),
+					bugu: specs.find('.spec-bugu').recipeParameter()
+				};
+
+			e.on('recipecardchange', null, function () {
+				var recipe = self.recipe,
+					stats = self.stats,
+					style = recipe.info.style;
+
+				console.log('recipe', recipe);
+
+
+				var codes = ['og', 'fg', 'ibu', 'srm'];
+
+				$.each(codes, function (i, paramCode) {
+					var paramVal = {};
+					if($.isPlainObject(style)){
+						paramVal.min = style[paramCode].min;
+						paramVal.max = style[paramCode].max;
+					}
+					paramVal.est = stats[paramCode];
+					paramVal.label = paramCode;
+					paramVals[paramCode].recipeParameter('set', paramVal);
+				});
+
+				/*
+				 * set the bugu, it has no min and max, just avg so it has to be treate differently
+				 */
+				var paramVal = {},
+					paramCode = 'bugu';
+
+				if($.isPlainObject(style)){
+					paramVal.avg = style[paramCode];
+				}
+				paramVal.est = stats[paramCode];
+				paramVal.label = paramCode;
+				paramVals[paramCode].recipeParameter('set', paramVal);
+
 			});
 		},
 
@@ -352,10 +478,10 @@
 				return;
 			}
 
-			console.log('BML', bml);
+			//console.log('BML', bml);
 
 			recipe = BML.parse(bml);
-			console.log('Recipe', recipe);
+			//console.log('Recipe', recipe);
 
 			try{
 				stats = BREWCALC.compute(recipe);
@@ -363,7 +489,12 @@
 				console.log('compute error: ', err);
 			}
 
-			console.log('Stats', stats);
+			self.stats = stats;
+			self.recipe = recipe;
+
+			//console.log('Stats', stats);
+
+			self._trigger('change');
 
 		},
 
