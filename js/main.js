@@ -1,3 +1,4 @@
+/* globals BEERCODER */
 (function () {
 	'use strict';
 
@@ -20,10 +21,14 @@
 	defaultRecipe += '--YEAST-----------------------------\n';
 	defaultRecipe += '1pkg Safeale US-05 [73%]';
 
+	var timer = $('#timer').beerTimer();
 
-	$('#brewcoder').recipeCard({
-		bml: defaultRecipe
+	$('#beercoder').recipeCard({
+		bml: BEERCODER.storage.bml || defaultRecipe,
+		change: function (ev, o) {
+			BEERCODER.storage.bml = o.bml;
+			timer.beerTimer('set', o.recipe);
+		}
 	});
-	
 
 }());

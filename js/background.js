@@ -3,8 +3,8 @@ chrome.app.runtime.onLaunched.addListener(function (arg) {
 	'use strict';
 	chrome.app.window.create('main.html',{
 		bounds: { 
-			width:780, 
-			height:490
+			width:1024, 
+			height:600
 		}, 
 		type:"shell"
 	});
