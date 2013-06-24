@@ -10,10 +10,10 @@ var BEERCODER = {};
 	};
 
 	BEERCODER.storage = {};
-	if(chrome && chrome.storage && chrome.storage.local){
-		BEERCODER.storage = chrome.storage.local;
-	}else if(localStorage){
-		BEERCODER.storage = localStorage;
+	if(window.chrome && window.chrome.storage && window.chrome.storage.local){
+		BEERCODER.storage = window.chrome.storage.local;
+	}else if(window.localStorage){
+		BEERCODER.storage = window.localStorage;
 	}
 
 	$.widget("beerCoder.recipeParameter", {
