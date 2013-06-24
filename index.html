@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+	<title>BeerCoder (BML Editor / Brew Assistant)</title>
+	<link rel="stylesheet" href="third_party/jqueryui/jquery-ui.css" type="text/css" />
+
+
+	<link rel="stylesheet" href="third_party/codemirror/lib/codemirror.css" type="text/css" />
+	<link rel="stylesheet" href="css/bml.css" type="text/css" />
+	<link rel="stylesheet" href="css/main.css" type="text/css" />
+
+</head>
+<body>
+	<h1 style="text-shadow: 0 0 20px #C8C8C8;">.: beerCoder :.</h1>
+
+	<div id="beercoder"></div>
+	<div id="timer"></div>
+	
+
+	<div id="templates" style="display:none;">
+
+		<div id="tmplRecipeCard" class="brewCard recipeBrewCard">
+			<div class="editorSection">
+				<textarea></textarea>
+			</div>
+			<div class="specsSectionWrapper">
+
+				<div class="specsSection primaryBeerSpecs">
+					<div class="spec-og" data-spec="og"></div>
+					<div class="spec-fg" data-spec="fg"></div>
+					<div class="spec-ibu" data-spec="ibu"></div>
+					<div class="spec-srm" data-spec="srm"></div>
+					<div class="spec-bugu" data-spec="bugu"></div>
+				</div>
+
+				<div class="specsSection recipeSpecs">
+					<div><span class="spec-abv"></span> <span class="spec-label">ABV</span> </div>
+					<div><span class="spec-abw"></span> <span class="spec-label">ABW</span> </div>
+					<div><span class="spec-cal12oz"></span> <span class="spec-label">cal (12oz)</span> </div>
+					<div><span class="spec-glbs"></span>lbs <span class="spec-label">Grain</span></div>
+					<div><span class="spec-hoz"></span>oz <span class="spec-label">Hops</span></div>
+
+					<div class="glass" style="background-color: rgb(192, 129, 62);">
+						<div class="glass-overlay"></div>
+					</div>
+				</div>
+
+				<!--
+
+				<div class="specsSection styleNotes">
+					
+				</div>
+
+				<div class="specsSection waterSpecs">
+					
+				</div>
+			-->
+			</div>
+		</div>
+
+		<div id="tmplRecipeParameter" class="recipeParameter">
+			<div class="label"></div>
+			<div class="est"></div>
+			<div class="guide-block">
+				<div class="guide guide-max"></div>
+				<div class="guide guide-min"></div>
+				<div class="guide guide-avg"></div>
+			</div>
+		</div>
+
+		<div id="tmplBeerTimer">
+			<div class="timer">00:00</div>
+			<div style="">
+				<div class="countDown" style="font-size:50px;font-family:monospace;">00:00</div>
+				<div style="">
+					<div>started: <span class="startDate"></span></div>
+					<div class="hopTimes"></div>
+				</div>
+			</div>
+			<button class="start">Start</button>
+			<button class="stop">Stop</button>
+		</div>
+
+	</div>
+
+
+	<script src="third_party/jquery/jquery-2.0.0.js"></script>
+	<script src="third_party/jqueryui/jquery-ui.js"></script>
+	<script src="third_party/moment.js"></script>
+
+	<script src="third_party/codemirror/lib/codemirror.js"></script>
+	<script src="third_party/codemirror/lib/util/simple-hint.js"></script>
+
+	
+	<script src="js/brewcalc/tables.js"></script>
+	<script src="js/brewcalc/bml.js"></script>
+	<script src="js/brewcalc/brewcalc.js"></script>
+	<script src="js/brewcalc/brewcalc-gravity.js"></script>
+	<script src="js/brewcalc/brewcalc-units.js"></script>
+	
+	<script src="js/beercoder.js"></script>
+	<script src="js/beerTimer.js"></script>
+	<script src="js/main.js"></script>
+</body>
