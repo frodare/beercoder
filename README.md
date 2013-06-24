@@ -1,7 +1,7 @@
 BeerCoder
 =========
 
-Beer recipe formulation and brewing software for the Chrome runtime.
+Beer recipe formulation and brewing software for the browser.
 
 Demo [http://www.beercoder.com/](http://www.beercoder.com/)
 
