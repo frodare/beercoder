@@ -16,6 +16,121 @@ var BEERCODER = {};
 		BEERCODER.storage = window.localStorage;
 	}
 
+
+	BEERCODER.ajax = function (command, data) {
+		data = data || {};
+		return $.ajax({
+			url: "/repo/" + command,
+			type: "POST",
+			dataType: "json",
+			processData: false,
+			contentType: "application/json; charset utf-8",
+			data: JSON.stringify(data)
+		});
+	};
+
+
+
+
+	$.widget("beerCoder.serverConnection", {
+		_create: function(){
+			var self = this,
+				e = self.element,
+				o = self.options;
+
+			BEERCODER.tmpl('tmplConnection').appendTo(e);
+			self.displayName = e.find('.displayName');
+			self.recipeSelect = e.find('select[name="recipes"]');
+
+			self.saveButton = e.find('button.save');
+			self.nameInput = e.find('input[name="recipeName"]');
+
+			self.update().done(function () {
+				self.updateList();
+			});
+			
+		},
+
+		updateList: function () {
+			var self = this;
+			BEERCODER.ajax('list').done(function (resp) {
+				var select = self.recipeSelect;
+
+				select.empty();
+
+				if(!resp.length){
+					select.hide();
+					return;
+				}
+
+				
+
+				$.each(resp, function (i, recipe) {
+					select.append('<option>' + recipe.name + '</option>');
+				});
+
+				select.show();
+			});
+		},
+
+		update: function () {
+			var self = this;
+
+			console.log('update connection display');
+
+			return BEERCODER.ajax('status').done(function (resp) {
+				self.user = resp.user;
+				self.showUser();
+			}).fail(function (err) {
+				console.log('Status check failed', err);
+				self.showLogin();
+			});
+		},
+
+		showUser: function () {
+			var self = this;
+			self.displayName.text(self.user.displayName);
+			self.recipeSelect.show();
+			self.saveButton.show();
+			self.nameInput.show();
+
+			self.saveButton.on('click', function (ev) {
+				ev.preventDefault();
+				self.save(self.nameInput.val());
+			});
+		},
+
+		showLogin: function () {
+			var self = this;
+			console.log('display login');
+			self.displayName.html('<a href="/auth/facebook">Login with Facebook</a>');
+			self.recipeSelect.hide();
+			self.saveButton.hide();
+			self.nameInput.hide();
+		},
+
+		save: function (name) {
+			var self = this;
+
+			console.log('saving ', name);
+
+			var recipeData = BEERCODER.editor.recipeCard('getData');
+
+			recipeData.name = name;
+
+			return BEERCODER.ajax('save', recipeData).pipe(function (resp) {
+				var dfd = $.Deferred();
+				if(!resp.user){
+					dfd.reject('not logged in');
+				}else{
+					dfd.resolve(resp);
+				}
+				return dfd;
+			});
+		}
+
+	});
+
 	$.widget("beerCoder.recipeParameter", {
 		
 		_create: function(){
@@ -130,9 +245,6 @@ var BEERCODER = {};
 
 				setTimeout(function() {
 
-					console.log('updating gutter values');
-
-					//console.log($('.cm-grain:visible'));
 					e.find('pre .cm-grain:nth-child(1)').each(function(i, e) {
 						var grainLine = $(e);
 						var offset = grainLine.position();
@@ -173,8 +285,6 @@ var BEERCODER = {};
 
 						var percent = (stats && (100 * amount / stats.hoz).toFixed(1)) || 0;
 
-						console.log(amount);
-
 						info.html(percent + '%');
 
 						info.css({
@@ -214,9 +324,7 @@ var BEERCODER = {};
 					stats = self.stats,
 					style = recipe.info.style;
 
-				console.log('recipe', recipe, 'stats', stats);
-
-
+				
 				var codes = ['og', 'fg', 'ibu', 'srm'];
 
 				$.each(codes, function (i, paramCode) {
@@ -332,14 +440,26 @@ var BEERCODER = {};
 
 		set: function (bml) {
 			var self = this;
-
-
 			if(!bml){
 				return;
 			}
-
 			self.editor.setValue(bml);
+		},
 
+		get: function () {
+			var self = this,
+				cm = self.editor;
+			return cm.getValue();
+		},
+
+		getData: function () {
+			var self = this,
+				cm = self.editor;
+			return {
+				bml: cm.getValue(),
+				stats: self.stats,
+				recipe: self.recipe
+			};
 		}
 	});
 

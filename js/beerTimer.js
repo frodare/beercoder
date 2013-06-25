@@ -8,9 +8,6 @@
 (function($, b) {
 	'use strict';
 
-
-	console.log('in timer');
-
 	$.widget("bml.beerTimer", {
 		options: {
 			interval: 1000
@@ -21,8 +18,6 @@
 				o = self.options,
 				e = self.element;
 			
-			console.log('creating BML timer', window.beerRecipe);
-
 			e.html(BEERCODER.tmpl('tmplBeerTimer'));
 
 			
@@ -78,11 +73,7 @@
 				var label = hop.amount + hop.unit + ' ' + hop.name;
 				var timer = $('<div class="timer"/>').data('boilTime', +hop.min * 60 * 1000);
 				timer.data('label', label);
-				console.log('boiltime', +hop.min * 60 * 1000);
-
 				self.hopTimersWrapper.append(timer);
-
-				//hopTimers.push(hopTimer);
 			});
 
 		},

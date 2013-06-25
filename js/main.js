@@ -23,12 +23,16 @@
 
 	var timer = $('#timer').beerTimer();
 
-	$('#beercoder').recipeCard({
+	$('#connection').serverConnection();
+
+	var editor = $('#beercoder').recipeCard({
 		bml: BEERCODER.storage.bml || defaultRecipe,
 		change: function (ev, o) {
 			BEERCODER.storage.bml = o.bml;
 			timer.beerTimer('set', o.recipe);
 		}
 	});
+
+	BEERCODER.editor = editor;
 
 }());

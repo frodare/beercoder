@@ -12,15 +12,23 @@
 </head>
 <body style="padding-bottom:100px;">
 
-
-
 	<h1 style="text-shadow: 0 0 20px #C8C8C8;">.: beerCoder :.</h1>
 
+	<div id="connection"></div>
 	<div id="beercoder"></div>
 	<div id="timer"></div>
 	
 
 	<div id="templates" style="display:none;">
+
+		<div id="tmplConnection" class="beercoder-connection">
+			<div class="displayName"></div>
+			<select name="recipes"></select>
+
+
+			<input type="text" name="recipeName">
+			<button class="save">save</button>
+		</div>
 
 		<div id="tmplRecipeCard" class="brewCard recipeBrewCard">
 			<div class="editorSection">
