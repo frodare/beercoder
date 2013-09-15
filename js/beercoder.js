@@ -1,4 +1,4 @@
-/* globals BREWCALC, CodeMirror, BML, chrome */
+/*global BREWCALC:true, CodeMirror:true, BML:true, chrome:true, indexedDB:true */
 
 var BEERCODER = {};
 
@@ -130,7 +130,7 @@ var BEERCODER = {};
 		}
 
 	});
-
+	
 	$.widget("beerCoder.recipeParameter", {
 		
 		_create: function(){
@@ -197,6 +197,185 @@ var BEERCODER = {};
 
 			
 		}
+	});
+
+	var dbName = 'beercoder';
+
+	$.widget("beerCoder.recipeCollection", {
+		
+		_create: function(){
+			var self = this,
+				e = self.element,
+				o = self.options;
+
+			self.recipes = [];
+
+			console.log('recipe collection create');
+			self._localDbFetch().fail(function () {
+				console.log('failure', arguments);
+			});
+		},
+
+		_localDbOpen: function () {
+			var self = this;
+
+
+			if(self.localDbDfd){
+				return self.localDbDfd;
+			}
+
+			var	version = 1,
+				request = window.indexedDB.open(dbName, version),
+				dfd = $.Deferred();
+
+			request.onsuccess = function (e) {
+				dfd.resolve(e.target.result);
+			};
+
+			request.onerror = function (e) {
+				dfd.reject(e);
+			};
+
+			request.onupgradeneeded = function(e) {
+				var db = e.target.result;
+
+				// A versionchange transaction is started automatically.
+				e.target.transaction.onerror = function (e){
+					dfd.reject(e);
+				};
+
+				if(db.objectStoreNames.contains(dbName)) {
+					db.deleteObjectStore(dbName);
+				}
+
+				var store = db.createObjectStore(dbName, {
+					keyPath: "id"
+				});
+			};
+
+			self.localDbDfd = dfd;
+
+			return dfd;
+		},
+
+		_localDbSave: function (recipe) {
+			return this._localDbOpen().pipe(function (db){
+				var trans = db.transaction([dbName], "readwrite"),
+					store = trans.objectStore(dbName),
+					r = store.put(recipe),
+					dfd = $.Deferred();
+
+				r.onsuccess = function (e) {
+					dfd.resolve(e);
+				};
+
+				r.onerror = function (e) {
+					dfd.reject(e);
+				};
+				return dfd;
+			});
+		},
+
+		_localDbFetch: function () {
+			var self = this;
+
+			return this._localDbOpen().pipe(function (db){
+				var trans = db.transaction([dbName], "readwrite"),
+					store = trans.objectStore(dbName),
+					//keyRange = window.IDBKeyRange.lowerBound(0),
+					r = store.openCursor(),
+					dfd = $.Deferred();
+
+				console.log('starting fetch');
+
+				r.onsuccess = function (e) {
+					//dfd.resolve(store, e.target.result);
+
+					var cursor = e.target.result;
+
+					if(!cursor){
+						return;
+					}
+
+					var r = store.get(cursor.key);
+      
+					r.onsuccess = function (e) {
+						//console.log('key:', cursor.key, 'value:', r.result);
+						// OK, now move the cursor to the next item. 
+						console.log('on record', e);
+						self.add(e.target.result);
+						cursor['continue']();
+					};
+				};
+
+				r.onerror = function (e) {
+					dfd.reject(e);
+				};
+
+				return dfd;
+			});
+		},
+
+		_localDbDelete: function (id) {
+			var self = this;
+
+			this._localDbOpen().pipe(function (db) {
+				var trans = db.transaction(["todo"], "readwrite"),
+					store = trans.objectStore("todo"),
+					r = store['delete'](id),
+					dfd = $.Deferred();
+
+				r.onsuccess = function(e) {
+					dfd.resolve(e);
+				};
+
+				r.onerror = function(e) {
+					dfd.reject(e);
+				};
+
+				return dfd;
+			});
+
+		},
+
+		clear: function () {
+			this.set();
+		},
+
+		set: function (recipes) {
+			var self = this,
+				e = self.element;
+			self.recipes = recipes;
+			self.draw();
+		},
+
+		add: function (recipe) {
+			var self = this,
+				recipes = self.recipes,
+				e = self.element;
+
+			recipes.push(recipe);
+			$('<div/>').recipeCard().recipeCard('set', recipe).appendTo(e);
+		},
+
+		draw: function () {
+			var self = this,
+				recipes = self.recipes,
+				e = self.element;
+
+
+			e.empty();
+
+			if(!recipes || !recipes.length){
+				return;
+			}
+
+			$.each(recipes, function (i, recipe) {
+				$('<div/>').recipeCard('set', recipe).appendTo(e);
+			});
+		}
+
+
 	});
 
 	$.widget("beerCoder.recipeCard", {
@@ -438,12 +617,13 @@ var BEERCODER = {};
 			this.set();
 		},
 
-		set: function (bml) {
+		set: function (recipe) {
 			var self = this;
-			if(!bml){
+			if(!recipe || !recipe.bml){
 				return;
 			}
-			self.editor.setValue(bml);
+			console.log('set recipe card', recipe);
+			self.editor.setValue(recipe.bml);
 		},
 
 		get: function () {

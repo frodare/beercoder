@@ -21,18 +21,26 @@
 	defaultRecipe += '--YEAST-----------------------------\n';
 	defaultRecipe += '1pkg Safeale US-05 [73%]';
 
-	var timer = $('#timer').beerTimer();
+	//var timer = $('#timer').beerTimer();
 
-	$('#connection').serverConnection();
-
+	/*
 	var editor = $('#beercoder').recipeCard({
 		bml: BEERCODER.storage.bml || defaultRecipe,
 		change: function (ev, o) {
 			BEERCODER.storage.bml = o.bml;
 			timer.beerTimer('set', o.recipe);
 		}
+	});*/
+
+	//BEERCODER.editor = editor;
+
+	var c = $('#beercoder').recipeCollection();
+
+	$('button.add').on('click', function () {
+		c.recipeCollection('add', {
+			bml:defaultRecipe
+		});
 	});
 
-	BEERCODER.editor = editor;
 
 }());

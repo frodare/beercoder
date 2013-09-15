@@ -5,14 +5,18 @@ body {
 	font-family: 'Armata', sans-serif;
 	/*background: url(../img/interlace.png) top left repeat, rgba(255,255,255,0.75);*/
 	/*background-color:#333;*/
-	background-color:#eee;
+	/*background-color:#eee;*/
 	color:#444;
 
+
+	background: rgb(253, 255, 236);
+
 	/*text-shadow: 0 0 3px #C8C8C8;*/
-	text-shadow: 0 0 5px #aaa;
+	/*text-shadow: 0 0 5px #aaa;*/
 
-	text-align: center;
-
+	/*text-align: center;*/
+	margin:0;
+	padding:0;
 
 }
 
@@ -141,7 +145,7 @@ h1 {
 } 
 
 .recipeParameter .label {
-	font-size: 1.25rem;
+	font-size: 0.97rem;
 	display:inline;
 	text-transform:uppercase;
 } 
@@ -172,9 +176,10 @@ h1 {
 
 .recipeParameter .guide-block .guide {
 	display:inline;
+	color:rgb(226, 198, 84);
 } 
 
-.recipeParameter .guide-block .guide-min:before {
+.recipeParameter .guide-block .guide-max:before {
 	content: ' to '
 }
 
@@ -207,10 +212,38 @@ h1 {
 
 }*/
 
+
+
+
+.recipeHeader {
+	text-align: left;
+	background: rgb(99, 55, 0);
+	color:rgb(253, 255, 236);
+
+	padding:0.5rem;
+}
+
+.recipeHeader input[name="recipeName"] {
+	outline: none;
+	background: rgb(139, 79, 4);
+	border: 0;
+	font-size: 1.5rem;
+	color: rgb(253, 255, 236);
+	vertical-align: middle;
+	width:20rem;
+	font-family: 'Armata', sans-serif;
+}
+
 .glass {
+	width:2rem;
 	height:2rem;
-	margin-top:1rem;
+	vertical-align: middle;
 	transition: background-color .25s linear, text-shadow .25s linear;
+	display:inline-block;
+}
+
+.headerSpec {
+	display: inline-block;
 }
 
 .countDown {
