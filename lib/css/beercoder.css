@@ -1,0 +1,230 @@
+body{
+	background:#000;
+	font-family: 'Duru Sans', sans-serif;
+}
+
+
+/*
+ * beercoder app styles
+ */
+
+.beercoder{
+	background:#d0d0d0;
+	width:60rem;
+	border:2px solid #999;
+}
+
+.beercoder .design-rack {
+	width:30rem;
+	float:left;
+}
+
+.beercoder .design-rack .statsdisplay{
+	background:#e0e0e0;
+	padding:0.5rem;
+	text-align: center;
+}
+
+
+.beercoder .design-rack .CodeMirror-lines{
+	
+	background:#fff;
+}
+
+
+.beercoder .design-rack .CodeMirror-lines > div{
+	border-left:1px solid #ccc;
+}
+
+.beercoder .tool-rack {
+	width:30rem;
+	margin-left:30rem;
+	
+}
+
+
+/*
+ * Stats Display Styles
+ */
+
+.stats-display .summary-stats{
+	margin-top:1rem;
+}
+
+.stats-display .summary-stats .stat-value,
+.stats-display .summary-stats .stat-label,
+.stats-display .summary-stats .stat-item {
+	display:inline;
+}
+
+.stats-display .summary-stats .stat-item {
+	margin-right:1rem;
+}
+
+.stats-display .summary-stats .stat-value {
+	font-size:1.2rem;
+	font-family: impact;
+}
+
+.stats-display .summary-stats .stat-label {
+	font-size:0.9rem;
+}
+
+.stats-display .design-stats .stat-item {
+	margin-right:1rem;
+	display:inline-block;
+}
+
+.stats-display .design-stats .stat-value {
+	font-size:1.5rem;
+	font-family: impact;
+	text-align: center;
+	color:#1A9C09;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stats-display .design-stats .error .stat-value {
+	color:red;
+}
+
+.stats-display .design-stats .stat-value span{
+	font-size:0.9rem;
+	font-family: 'Duru Sans', sans-serif;
+}
+
+.stats-display .style-guide {
+	text-align: center;
+	font-size:0.8rem;
+}
+
+.stats-display .style-guide div {
+	display: inline
+}
+
+.stats-display .style-guide .stat-style-max:before {
+	content:' - ';
+}
+
+
+
+
+/*
+ * BML CodeMirror Styles
+ */
+
+.CodeMirror {
+   /* border-top: 1px solid black; border-bottom: 1px solid black; */
+   font-size:15px;
+   line-height: 16px;
+   position: relative;
+   color:#505050;
+}
+
+.CodeMirror-scroll {
+    height: auto; 
+    overflow: visible;
+}
+
+.CodeMirror-completions {
+	position: absolute;
+	overflow: hidden;
+}
+
+.cm-s-default span.cm-header {
+	color: black;
+}
+
+.CodeMirror-completions select {
+	width: auto;
+	border: 1px solid #555;
+	border-top: 0;
+	/*background: white;*/
+	padding: 0 1em 1em;
+	font-family: 'Armata', sans-serif;
+
+	font-family: monospace;
+
+	border: 0;
+	outline: none;
+	padding: 0 0.5em;
+	box-shadow: 0px 4px 5px #999;
+
+
+	font-size:15px;
+	line-height: 16px;
+	color:#555;
+
+	background-color:#333;
+}
+
+.CodeMirror-lines {
+	
+	
+	/*box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+	border-radius: 0.5rem;
+	 * color:#222;
+	
+	 *
+	background: rgba(255,255,255,0.85);
+	*/
+
+	
+	padding-left: 4rem;
+	text-align: left;
+
+}
+
+.CodeMirror .gutter-info {
+	color:#aaa;
+	left: -75px;
+	position: absolute;
+	text-align:right;
+	width:4rem;
+}
+
+
+.CodeMirror span.cm-attribute {
+	color:#999;
+}
+
+/*
+.CodeMirror pre .cm-header {
+	font-family: monospace;
+}
+
+.CodeMirror pre {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+ */
+
+
+
+#timer,
+.specsSectionWrapper,
+.specsSection {
+	display:inline-block;
+	vertical-align: top;
+}
+
+#timer {
+	margin-top:1rem;
+}
+
+.specsSection {
+	width:10rem;
+	height: 25em;
+	margin-left:0.5rem;
+	
+	padding:1rem;
+	border-radius: 0.5rem;
+	
+	text-align: left;
+
+
+	/*
+	box-shadow: inset 0 0 12px rgba(255,255,255,0.2);
+	border:1px solid #555;
+	*/
+}
+
+

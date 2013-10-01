@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <head>
 	<title>BeerCoder (BML Editor Component)</title>
-	<script data-main="require_config.js" src="lib/require.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+	<script data-main="../require_config.js" src="../lib/require.js"></script>
 
-	<link rel="stylesheet" href="lib/codemirror/lib/codemirror.css" type="text/css" />
-	<link rel="stylesheet" href="lib/codemirror/lib/util/simple-hint.css" type="text/css" />
+
+	<link rel="stylesheet" href="../lib/codemirror/lib/codemirror.css" type="text/css" />
+	<link rel="stylesheet" href="../lib/codemirror/lib/util/simple-hint.css" type="text/css" />
+	<link rel="stylesheet" href="../lib/css/beercoder.css" type="text/css" />
 	
 </head>
 <body>
@@ -37,6 +40,7 @@
 		defaultRecipe += 'style: 10A 2008 American Pale Ale\n';
 		defaultRecipe += 'brewers: \n';
 		defaultRecipe += 'size: 5 gallons\n';
+		defaultRecipe += 'efficiency: 70%\n';
 		defaultRecipe += '\n';
 		defaultRecipe += '--GRAIN-----------------------------\n';
 		defaultRecipe += '9 lbs American 2 row [1.8L 37PPG]\n';
@@ -52,22 +56,8 @@
 
 
 		setTimeout(function() {
-			requirejs(['bmlcodemirror'], function (editor) {
-				//jQuery, canvas and the app/sub module are all
-				//loaded and can be used here now.
-				//console.log(tables);
-				//console.log(parser('--notes\ntest'));
-
-				var instatnce = editor($('#target')[0], {
-					onChange: function () {
-						
-					}
-				});
-
-
-				instatnce.setValue(defaultRecipe);
-
-
+			requirejs(['jquery', 'beercoder'], function ($) {
+				$('#target').beercoder().beercoder('set', defaultRecipe);
 			});
 		}, 1000);
 		

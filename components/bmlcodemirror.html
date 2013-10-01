@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+	<title>BeerCoder (BML Editor Component)</title>
+	<script data-main="../require_config.js" src="../lib/require.js"></script>
+
+	<link rel="stylesheet" href="../lib/codemirror/lib/codemirror.css" type="text/css" />
+	<link rel="stylesheet" href="../lib/codemirror/lib/util/simple-hint.css" type="text/css" />
+	
+</head>
+<body>
+
+	<div id="target">test stuff</div>
+	
+
+	<!--
+	<script src="../third_party/jquery/jquery-2.0.0.js"></script>
+	<script src="../third_party/jqueryui/jquery-ui.js"></script>
+	<script src="../third_party/moment.js"></script>
+
+	<script src="../third_party/codemirror/lib/codemirror.js"></script>
+	<script src="../third_party/codemirror/lib/util/simple-hint.js"></script>
+
+	
+	<script src="../js/brewcalc/tables.js"></script>
+	<script src="../js/brewcalc/bml.js"></script>
+	<script src="../js/brewcalc/brewcalc.js"></script>
+	<script src="../js/brewcalc/brewcalc-gravity.js"></script>
+	<script src="../js/brewcalc/brewcalc-units.js"></script>
+	
+	<script src="../js/beercoder.js"></script>
+	<script src="../js/beerTimer.js"></script>
+	-->
+
+
+	<script type="text/javascript">
+		var defaultRecipe = '--INFO------------------------------\n';
+		defaultRecipe += 'style: 10A 2008 American Pale Ale\n';
+		defaultRecipe += 'brewers: \n';
+		defaultRecipe += 'efficiency: 70%\n';
+		defaultRecipe += 'size: 5 gallons\n';
+		defaultRecipe += '\n';
+		defaultRecipe += '--GRAIN-----------------------------\n';
+		defaultRecipe += '9 lbs American 2 row [1.8L 37PPG]\n';
+		defaultRecipe += '1 lbs Crystal 60 Malt [60L 34PPG]\n';
+		defaultRecipe += '\n';
+		defaultRecipe += '--HOPS------------------------------\n';
+		defaultRecipe += '40 min 1 oz Centennial [10%]\n';
+		defaultRecipe += '10 min 1/2 oz Cascade (U.S.) [5%]\n';
+		defaultRecipe += '5 min 1/2 oz Cascade (U.S.) [5%]\n';
+		defaultRecipe += '\n';
+		defaultRecipe += '--YEAST-----------------------------\n';
+		defaultRecipe += '1pkg Safeale US-05 [73%]';
+
+
+		setTimeout(function() {
+			requirejs(['bmlcodemirror'], function (editor) {
+				//jQuery, canvas and the app/sub module are all
+				//loaded and can be used here now.
+				//console.log(tables);
+				//console.log(parser('--notes\ntest'));
+
+				var instatnce = editor($('#target')[0], {
+					onChange: function () {
+						
+					}
+				});
+
+
+				instatnce.setValue(defaultRecipe);
+
+
+			});
+		}, 1000);
+		
+	</script>
+</body>
