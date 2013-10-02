@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+	<title>BeerCoder (BML Editor Component)</title>
+	<script data-main="../require_config.js" src="../lib/require.js"></script>
+
+	<link rel="stylesheet" href="../lib/codemirror/lib/codemirror.css" type="text/css" />
+	<link rel="stylesheet" href="../lib/codemirror/lib/util/simple-hint.css" type="text/css" />
+	<link rel="stylesheet" href="../lib/css/beercoder.css" type="text/css" />
+	
+</head>
+<body>
+
+	<div id="target">test stuff</div>
+	
+	<script type="text/javascript">
+		
+		setTimeout(function() {
+			requirejs(['jquery', 'loginwidget'], function ($) {
+				
+				$('#target').loginwidget();
+
+			});
+		}, 1000);
+		
+	</script>
+</body>

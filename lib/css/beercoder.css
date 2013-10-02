@@ -1,17 +1,24 @@
 body{
-	background:#000;
 	font-family: 'Duru Sans', sans-serif;
+	color:#444;
 }
 
+/*
+ * login widget
+ */
+.login-widget,
+.login-widget > div {
+	display:inline-block;
+	vertical-align: middle;
+}
 
 /*
  * beercoder app styles
  */
 
 .beercoder{
-	background:#d0d0d0;
+	/*background:#d0d0d0;*/
 	width:60rem;
-	border:2px solid #999;
 }
 
 .beercoder .design-rack {
@@ -20,7 +27,7 @@ body{
 }
 
 .beercoder .design-rack .statsdisplay{
-	background:#e0e0e0;
+	/*background:#e0e0e0;*/
 	padding:0.5rem;
 	text-align: center;
 }
@@ -28,7 +35,7 @@ body{
 
 .beercoder .design-rack .CodeMirror-lines{
 	
-	background:#fff;
+	/*background:#fff;*/
 }
 
 
@@ -39,7 +46,6 @@ body{
 .beercoder .tool-rack {
 	width:30rem;
 	margin-left:30rem;
-	
 }
 
 
@@ -48,7 +54,7 @@ body{
  */
 
 .stats-display .summary-stats{
-	margin-top:1rem;
+	margin-top:0.5rem;
 }
 
 .stats-display .summary-stats .stat-value,
@@ -79,8 +85,7 @@ body{
 	font-size:1.5rem;
 	font-family: impact;
 	text-align: center;
-	color:#1A9C09;
-	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	color:#444;
 }
 
 .stats-display .design-stats .error .stat-value {

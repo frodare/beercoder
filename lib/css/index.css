@@ -1,0 +1,38 @@
+body{
+	font-family: 'Duru Sans', sans-serif;
+	background:#444;
+	padding:0;
+	margin:0;
+	color:#fff;
+}
+
+.header{
+	height:5rem;
+}
+
+h1.title {
+	font-family: 'impact';
+	color:white;
+	font-weight: normal;
+	padding:0 2rem;
+	display: inline-block;
+	margin:0;
+	vertical-align: middle;
+	float:left;
+}
+
+.login-widget {
+	float:right;
+	padding:0.5rem;
+}
+
+.app-wrapper {
+	background: white;
+	padding:2rem 0;
+	min-width:60rem;
+	color:#444;
+}
+
+.beercoder {
+	margin:0 auto;
+}
