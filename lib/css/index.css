@@ -10,6 +10,15 @@ body{
 	height:5rem;
 }
 
+a.login-link {
+	text-decoration: none;
+	color:#fff;
+}
+
+a.login-link:hover {
+	text-decoration: underline;
+}
+
 h1.title {
 	font-family: 'impact';
 	color:white;
