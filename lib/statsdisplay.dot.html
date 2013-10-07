@@ -7,66 +7,88 @@
 
 		<div class="stat-item {{= data.style.og.css}}">
 			<div class="stat-value">{{= data.stats.og}}<span>OG<span></div>
-			<div class="style-guide">
-				<div class="stat-style-min">{{= data.style.og.min}}</div>
-				<div class="stat-style-max">{{= data.style.og.max}}</div>
-			</div>
+			{{? data.style.category}}
+				<div class="style-guide">
+					<div class="stat-style-min">{{= data.style.og.min}}</div>
+					<div class="stat-style-max">{{= data.style.og.max}}</div>
+				</div>
+			{{?}}
 		</div>
 
 		<div class="stat-item {{= data.style.fg.css}}">
 			<div class="stat-value">{{= data.stats.fg}}<span>FG<span></div>
-			<div class="style-guide">
-				<div class="stat-style-min">{{= data.style.fg.min}}</div>
-				<div class="stat-style-max">{{= data.style.fg.max}}</div>
-			</div>
+			{{? data.style.category}}
+				<div class="style-guide">
+					<div class="stat-style-min">{{= data.style.fg.min}}</div>
+					<div class="stat-style-max">{{= data.style.fg.max}}</div>
+				</div>
+			{{?}}
 		</div>
 
 		<div class="stat-item {{= data.style.ibu.css}}">
 			<div class="stat-value">{{= data.stats.ibu}}<span>IBU<span></div>
-			<div class="style-guide">
-				<div class="stat-style-min">{{= data.style.ibu.min}}</div>
-				<div class="stat-style-max">{{= data.style.ibu.max}}</div>
-			</div>
+			{{? data.style.category}}
+				<div class="style-guide">
+					<div class="stat-style-min">{{= data.style.ibu.min}}</div>
+					<div class="stat-style-max">{{= data.style.ibu.max}}</div>
+				</div>
+			{{?}}
 		</div>
 
 		<div class="stat-item {{= data.style.srm.css}}">
 			<div class="stat-value">{{= data.stats.srm}}<span>SRM<span></div>
-			<div class="style-guide">
-				<div class="stat-style-min">{{= data.style.srm.min}}</div>
-				<div class="stat-style-max">{{= data.style.srm.max}}</div>
-			</div>
+			{{? data.style.category}}
+				<div class="style-guide">
+					<div class="stat-style-min">{{= data.style.srm.min}}</div>
+					<div class="stat-style-max">{{= data.style.srm.max}}</div>
+				</div>
+			{{?}}
 		</div>
 
 		<div class="stat-item">
-			<div class="stat-value">{{= data.stats.bugu}}<span>BUGU<span></div>
-			<div class="style-guide">
-				<div class="stat-style-avg">{{= data.style.bugu}}</div>
-			</div>
+			<div class="stat-value">{{= data.stats.bugu}}<span>BU:GU<span></div>
+			{{? data.style.category}}
+				<div class="style-guide">
+					<div class="stat-style-avg">{{= data.style.bugu}}</div>
+				</div>
+			{{?}}
 		</div>
 
 	</div>
 
 
 	<div class="summary-stats">
-		
-		<div class="stat-item">
-			<div class="stat-value stat-abv">{{= data.stats.abv}}%</div>
-			<div class="stat-label">ABV</div>
+
+		<div class="color-guide" style="{{= data.glasscss}}">
+			<div class="glass-overlay"></div>
 		</div>
 
-		<div class="stat-item">
-			<div class="stat-value stat-cal12oz">{{= data.stats.cal12oz}}</div>
-			<div class="stat-label">cal (12oz)</div>
-		</div>
+		<div style="display:inline-block;vertical-align:middle;">
 
-		<div class="stat-item">
-			<div class="stat-value stat-glbs">{{= data.stats.glbs}}</div>
-			<div class="stat-label">lbs Grain</div>
-		</div>
+			<div>
+				<div class="stat-item">
+					<div class="stat-value stat-abv">{{= data.stats.abv}}%</div>
+					<div class="stat-label">ABV</div>
+				</div>
 
-		<div class="stat-item">
-			<div class="stat-value stat-hoz">{{= data.stats.hoz}}</div>
-			<div class="stat-label">oz Hops</div>
+				<div class="stat-item">
+					<div class="stat-value stat-cal12oz">{{= data.stats.cal12oz}}</div>
+					<div class="stat-label">cal (12oz)</div>
+				</div>
+			</div>
+
+			<div>
+				<div class="stat-item">
+					<div class="stat-value stat-glbs">{{= data.stats.glbs}}</div>
+					<div class="stat-label">lbs Grain</div>
+				</div>
+
+				<div class="stat-item">
+					<div class="stat-value stat-hoz">{{= data.stats.hoz}}</div>
+					<div class="stat-label">oz Hops</div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>

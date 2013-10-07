@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <head>
-	<title>BeerCoder (BML Editor Component)</title>
+	<title>BeerCoder</title>
+	<meta name="description" content="beer recipe formuation and brewing software">
 	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 	<script data-main="require_config.js" src="lib/require.js"></script>
 
-
+	<link rel="stylesheet" href="lib/jqueryui/jquery-ui.css" type="text/css" />
 	<link rel="stylesheet" href="lib/codemirror/lib/codemirror.css" type="text/css" />
 	<link rel="stylesheet" href="lib/codemirror/lib/util/simple-hint.css" type="text/css" />
 	<link rel="stylesheet" href="lib/css/beercoder.css" type="text/css" />
@@ -21,8 +24,20 @@
 		<div id="beercoder"><div style="text-align:center;">loading ...</div></div>
 	</div>
 
-	<div class="footer" style="text-align:center;margin-top:4rem;">
-		<div><a href="https://github.com/frodare/beercoder/issues/new" style="color:white;" target="_blank">- file an issue -</a></div>
+	<div class="beercorder-primer">
+		<p>
+			<span class="beercoder-name">BeerCoder</span> is radically different from the average beer recipe program.  Instead of having menu after menu to navigate through for entering the recipe information, beercoder uses one free-form text box where the recipe is entered in Beer Markup Language (BML).  BML is a concise and easy-to-read beer recipe format.    
+		</p>
+		<p>
+			Start with the Demo Recipe and start changing the values. Beercoder will update the calculations as you type. To add more malt, add a new line at the end of the Grain Section. Then start typing “roasted” and a drop down will appear with predefined options.  Notice the parameters at the end of the grain and hop entries wrapped with brackets.  The parameters can be changed with the actual values of your ingredients for a more accurate calculation To change the style, start typing “ipa” at the beginning of the style line under the info section and select the type of IPA you want from the drop down.  If you want to show off, just type the BJCP style category.  All of the recipe information in beercoder is entered in the same fashion without ever leaving the front screen.  
+		</p>
+		<p>
+			If you would like to save your recipes, login with your facebook account using the link at the top right.
+		</p>
+	</div>
+
+	<div class="footer" style="text-align:center;margin:2rem 0;">
+		<div><a href="https://github.com/frodare/beercoder/issues/new" style="color:#000;" target="_blank">- file an issue -</a></div>
 		<div style="margin-top:0.5rem;">&copy; Charles Howard 2012</div>
 	</div>
 	
@@ -45,17 +60,35 @@
 		setTimeout(function() {
 			requirejs(['jquery', 'beercoder', 'loginwidget'], function ($) {
 			
-				
+				var beercoderEl = $('#beercoder');
 
-				$('#beercoder').beercoder();
+				beercoderEl.beercoder();
 
 				$('#loginwidget').loginwidget();
 
-				$(document).on('loginwidgetselect', function (ev, data) {
-					$('#beercoder').beercoder('set', (data && data.bml) || '');
-				})
+				$(document).on('bmlchange', function (ev, bml) {
+					beercoderEl.beercoder('set', bml || '');
+				});
+
+				$(document).on('bmlappendnote', function (ev, note) {
+					console.log('append note', note)
+					if(!note){
+						return;
+					}
+					beercoderEl.beercoder('set', beercoderEl.beercoder('get') + '\n' + note);
+				});
+
+				$(document).on('beercoderchange', function (ev, data) {
+					var name = data && data.recipe && data.recipe.info && data.recipe.info.name;
+					if(name) {
+						document.title = name + ' (BeerCoder)';
+					}
+				});
 			});
 		}, 500);
+
+
 		
+	
 	</script>
 </body>

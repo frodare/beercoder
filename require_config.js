@@ -23,7 +23,7 @@
 			}
 		},
 		callback: function () {
-			console.log('loaded requirejs config');
+			//console.log('loaded requirejs config');
 		},
 		doT: {
 			ext: '.dot.html', // extension of the templates, defaults to .dot

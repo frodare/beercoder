@@ -1,33 +1,85 @@
 body{
-	font-family: 'Duru Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	background:#444;
+	background-image:url('../../img/back.png');
 	padding:0;
 	margin:0;
-	color:#fff;
+	color:#111;
+}
+
+.beercoder-name {
+	font-family: impact;
+	color: #604000;
+	font-size: 1.1rem;
 }
 
 .header{
-	height:5rem;
+	height:3rem;
+}
+
+.header select,
+.header button {
+	height: 1.8rem;
+	color: #fff;
+	background: #555;
+	border: 1px solid #979696;
+	cursor: pointer;
+}
+
+.header select:hover,
+.header button:hover {
+	background: #fff;
+	color: #555;
+}
+
+.display-name {
+	margin-right: 1rem;
+
+	text-shadow: 0 0 11px rgba(0, 0, 0, 0.43);
+	color: white;
+	font-family: impact;
+	font-size: 1.5rem;
 }
 
 a.login-link {
 	text-decoration: none;
-	color:#fff;
+	font-weight: bold;
+	color:black;
 }
 
 a.login-link:hover {
 	text-decoration: underline;
 }
 
+.beercorder-primer {
+	margin:1rem;
+	margin-top:2rem;
+	font-size:0.9rem;
+	padding:1rem;
+	border-radius: 1rem;
+	background:rgba(255,255,255,0.7);
+}
+
 h1.title {
-	font-family: 'impact';
-	color:white;
-	font-weight: normal;
-	padding:0 2rem;
+	font-family: impact, 'Open Sans', sans-serif;
+
+	font-weight: 300;
+	padding:0 1rem;
 	display: inline-block;
 	margin:0;
 	vertical-align: middle;
 	float:left;
+	font-size:2rem;
+	line-height: 3rem;
+
+	color: white;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.44);
+
+	/*
+	position: absolute;
+	top: 32px;
+	left: 0;
+	*/
 }
 
 .login-widget {
@@ -40,6 +92,8 @@ h1.title {
 	padding:2rem 0;
 	min-width:60rem;
 	color:#444;
+
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
 .beercoder {
