@@ -54,11 +54,24 @@
 	<script type="text/javascript">
 		//var storage = window.localStorage;
 
-		
+
+		var ajax = function (command, data) {
+			data = data || {};
+			return $.ajax({
+				url: "/repo/" + command,
+				type: "POST",
+				dataType: "json",
+				processData: false,
+				contentType: "application/json; charset utf-8",
+				data: JSON.stringify(data)
+			});
+		};
 
 
 		setTimeout(function() {
 			requirejs(['jquery', 'beercoder', 'loginwidget'], function ($) {
+
+
 			
 				var beercoderEl = $('#beercoder');
 
@@ -84,6 +97,31 @@
 						document.title = name + ' (BeerCoder)';
 					}
 				});
+
+
+
+				function locationHashChanged() {
+					/*
+					if (location.hash === "#somecoolfeature") {
+						somecoolfeature();
+					}*/
+
+					var id = (location.hash || '#').substring(1);
+
+					ajax('list', {
+						id: id
+					}).done(function (resp) {
+						var bml = resp && resp.length && resp[0].bml;
+						beercoderEl.beercoder('set', bml || '');
+					});
+
+					console.log('load recipe, ', id);
+				}
+
+				window.onhashchange = locationHashChanged;
+
+				locationHashChanged();
+
 			});
 		}, 500);
 
